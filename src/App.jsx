@@ -1,100 +1,113 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [streak, setStreak] = useState(0);
-  const [alarmTime, setAlarmTime] = useState(null);
-  const [friendsStatus, setFriendsStatus] = useState([
-    { name: 'アリス', wokeUp: true },
-    { name: 'ボブ', wokeUp: false },
-    { name: 'チャーリー', wokeUp: true },
-  ]);
-  const [activeTab, setActiveTab] = useState('home');
+  const [page, setPage] = useState("home");
+  const [wakeUpCount, setWakeUpCount] = useState(0);
+  const [missedCount, setMissedCount] = useState(0);
+  const [nickname, setNickname] = useState("");
 
-  const displayTimeline = () => {
-    return friendsStatus.map((friend, index) => (
-      <li key={index}>
-        {friend.name} は{friend.wokeUp ? '時間通りに起床しました!' : '寝坊しました。'}
-      </li>
-    ));
-  };
-
-  const displayFriendList = () => {
-    return friendsStatus.map((friend, index) => (
-      <li key={index}>{friend.name}</li>
-    ));
-  };
-
-  const setAlarm = () => {
-    const timeInput = document.getElementById('alarm-time').value;
-    if (timeInput) {
-      const newAlarmTime = new Date();
-      const [hours, minutes] = timeInput.split(':');
-      newAlarmTime.setHours(hours, minutes, 0, 0);
-      setAlarmTime(newAlarmTime);
+  const handleWakeUp = (success) => {
+    if (success) {
+      setWakeUpCount(wakeUpCount + 1);
+      alert("起きられました！");
+    } else {
+      setMissedCount(missedCount + 1);
+      alert("起きられませんでした...");
     }
   };
 
-  useEffect(() => {
-    if (alarmTime) {
-      const checkAlarm = setInterval(() => {
-        const now = new Date();
-        if (now >= alarmTime) {
-          clearInterval(checkAlarm);
-          if (window.confirm('起床時間です！時間通りに起きましたか？')) {
-            setStreak(streak + 1);
-          } else {
-            setStreak(0);
-            setFriendsStatus([...friendsStatus, { name: 'あなた', wokeUp: false }]);
-          }
-        }
-      }, 1000);
-
-      return () => clearInterval(checkAlarm);
+  const saveNickname = () => {
+    if (nickname) {
+      alert("ニックネームが保存されました: " + nickname);
+    } else {
+      alert("ニックネームを入力してください");
     }
-  }, [alarmTime, streak, friendsStatus]);
+  };
 
   return (
     <div className="container">
-      <div className="tabs">
-        <button className="tablink" onClick={() => setActiveTab('home')}>
-          ホーム
-        </button>
-        <button className="tablink" onClick={() => setActiveTab('alarm')}>
-          アラーム
-        </button>
-        <button className="tablink" onClick={() => setActiveTab('friends')}>
-          フレンド
-        </button>
-      </div>
-
-      {activeTab === 'home' && (
-        <div id="home" className="tabcontent">
-          <h2>ホーム</h2>
-          <p>連続起床日数: <span id="streak">{streak}</span> 日</p>
-          <h3>フレンドの起床状況</h3>
-          <ul id="timeline">{displayTimeline()}</ul>
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="logo">
+          <h2>ロゴ＆サービス名</h2>
         </div>
-      )}
+        <nav>
+          <ul>
+            <li onClick={() => setPage("home")}>ホーム</li>
+            <li onClick={() => setPage("ranking")}>ランキング</li>
+            <li onClick={() => setPage("achievements")}>実績</li>
+            <li onClick={() => setPage("settings")}>設定</li>
+          </ul>
+        </nav>
+      </aside>
 
-      {activeTab === 'alarm' && (
-        <div id="alarm" className="tabcontent">
-          <h2>アラーム設定</h2>
-          <label htmlFor="alarm-time">アラーム時間を選択:</label>
-          <input type="time" id="alarm-time" />
-          <button onClick={setAlarm}>アラームを設定</button>
-          <p id="alarm-status">
-            {alarmTime ? `アラームが${alarmTime.toLocaleTimeString()}に設定されました` : 'アラームが設定されていません'}
-          </p>
-        </div>
-      )}
+      {/* Main Content */}
+      <main className="main-content">
+        {page === "home" && (
+          <div className="page">
+            <header>
+              <h2>連続目標達成者</h2>
+            </header>
+            <section className="entry-list">
+              <div className="entry">
+                <div className="user-icon"></div>
+                <div className="entry-text">
+                  <h3>フレーム太郎</h3>
+                  <p>寝坊してもうた</p>
+                </div>
+              </div>
+            </section>
+            <div className="goal-box">
+              <h3>今日の目標</h3>
+              <p>時間: 8:30</p>
+              <button onClick={() => handleWakeUp(true)}>起きられた</button>
+              <button onClick={() => handleWakeUp(false)}>起きられなかった</button>
+            </div>
+          </div>
+        )}
 
-      {activeTab === 'friends' && (
-        <div id="friends" className="tabcontent">
-          <h2>フレンド</h2>
-          <ul id="friend-list">{displayFriendList()}</ul>
-        </div>
-      )}
+        {page === "ranking" && (
+          <div className="page">
+            <h2>ランキング</h2>
+            <p>あなたの順位は 5位 / 10名中です。</p>
+          </div>
+        )}
+
+        {page === "achievements" && (
+          <div className="page">
+            <h2>実績</h2>
+            <div className="achievement-box">
+              <p>起きられた回数: {wakeUpCount}</p>
+              <p>起きられなかった回数: {missedCount}</p>
+            </div>
+          </div>
+        )}
+
+        {page === "settings" && (
+          <div className="page">
+            <h2>設定</h2>
+            <label htmlFor="nickname">ニックネームを登録:</label>
+            <input
+              type="text"
+              id="nickname"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+              placeholder="ニックネーム"
+            />
+            <button onClick={saveNickname}>保存</button>
+          </div>
+        )}
+      </main>
+
+      {/* Group List */}
+      <aside className="group-list">
+        <h2>グループ一覧</h2>
+        <ul>
+          <li>グループ1</li>
+          <li>グループ2</li>
+        </ul>
+      </aside>
     </div>
   );
 }
