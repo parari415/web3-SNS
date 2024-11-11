@@ -1,0 +1,100 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+li{
+  list-style: none;
+}
+
+.left{
+  left: 0;
+  margin-left: 5vw;
+}
+
+.right{
+  right: 0;
+  margin-right: 5vw;
+}
+
+.bar{
+  position: fixed;
+  top: 0;
+  height: 880px;
+  width: 20vw;
+  margin: 5vh;
+  background: #a7a7a7;
+  /* padding-top: 5vh; */
+  border-radius: 20px;
+}
+
+
+.main{
+  display: flex;
+  justify-content: center;
+  margin: 2vh;
+  height: auto;
+  min-height: 100vh;
+  width: 45vw;
+  background: #a7a7a7;
+  /* padding-top: 15vh; */
+  border-radius: 20px;
+}
+
+/* サイドバー内の ul の中央配置 */
+.left ul {
+  display: flex;           /* フレックスボックスにする */
+  align-items: center;     /* 縦方向の中央配置 */
+  justify-content: center; /* 水平方向の中央配置 */
+  font-size: 32px;
+  width: 100%;             /* 幅いっぱいを使って中央配置しやすくする */
+  padding: 0;         /* 上下の余白を追加 */
+  box-sizing: border-box;  /* 幅の計算を含める */
+}
+
+
+li div{
+  width: 80%;
+  margin:auto;
+  margin-top: 6vh;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 50px;
+  font-weight: bold;
+  background: #424242;
+}
+
+/* App.css */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: auto;
+  min-height: 100vh;
+  gap: 16px; /* 各イベント間のスペース */
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.timeline-item {
+  /* padding: 10px; */
+  margin: 15px;
+  border: 2px solid #ddd;
+  height: 168px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+
+}
+
+.timeline-item h3 {
+  color: #424242;
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.timeline-item p {
+  margin: 4px 0;
+  color: #666;
+}
+
