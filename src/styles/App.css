@@ -69,16 +69,17 @@ li div{
 .timeline {
   display: flex;
   flex-direction: column;
+  background-color: #a7a7a7;
   width: 40vw;
   height: auto;
   min-height: 100vh;
   gap: 16px; /* 各イベント間のスペース */
   margin-top: 20px;
   box-sizing: border-box;
+  border-radius: 20px;
 }
 
 .timeline-item {
-  /* padding: 10px; */
   margin: 15px;
   border: 2px solid #ddd;
   height: 168px;
@@ -98,3 +99,160 @@ li div{
   color: #666;
 }
 
+/* App.css */
+
+/* RightBarコンポーネントの親要素に右寄せを適用 */
+
+.right-bar div {
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.4s ease-in-out; /* 緩やかなアニメーション */
+}
+
+.right-bar-container {
+  display: flex;
+  justify-content: flex-end; /* 右寄せ */
+  padding: 10px;
+}
+
+.right-bar div:hover {
+  /* background-color: #ddd; */
+  transform: scale(1.1); /* ホバー時に少し大きくする */
+}
+
+.right-bar div:active {
+  transform: scale(1); /* クリック時には元の大きさに戻す */
+}
+
+/* モーダルの背景 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* モーダルの内容 */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 時刻設定用フォーム */
+.time-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* 時刻入力部分を横並びに */
+.time-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input {
+  width: 50px;
+  padding: 8px;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+}
+
+span {
+  color: black;
+  font-size: 1.5rem;
+  padding: 0 5px;
+}
+
+/* ボタンの横並び設定 */
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* 時刻設定するボタン */
+.set-time-btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.set-time-btn:hover {
+  background-color: #005bb5;
+}
+
+/* 閉じるボタン */
+.close-btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: #424242;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #fc8c8c;
+}
+
+/* App.css */
+
+/* アイテムの基本スタイル */
+.timeline-item {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: background-color 5s ease, border-color 5s ease, box-shadow 5s ease; /* 5秒間かけて色が戻る */
+}
+
+/* 新しいアイテム用のスタイル */
+.timeline-item.new-item {
+  background-color: #e6f7ff; /* 背景色を変更 */
+  border-color: #66ccff; /* 枠線の色を変更 */
+  box-shadow: 0 0 10px rgba(0, 204, 255, 0.5); /* 輪郭にぼかし */
+}
+
+/* 文字やコンテンツのスタイル */
+.timeline-item h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.timeline-item p {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+.icon_img{
+  width: 100px;
+  height: 100px;
+  background-color: rgb(184, 184, 184);
+  object-fit:cover;
+  border-radius: 100px;
+}

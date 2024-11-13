@@ -1,11 +1,11 @@
 import '../styles/App.css'
 import TimeLine from '../compornents/TimeLine'
 
-function Home() {
+function Home({baseData,saveBox}) {
   return (
     <>
     <div className='main'>
-      <TimeLine/>
+      <TimeLine baseData={baseData} saveBox={saveBox}/>
     </div>
     </>
   )
